@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-ci-showcase
+  labels:
+    app: devops-ci-showcase
+spec:
+  selector:
+    app: devops-ci-showcase
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  type: ClusterIP
