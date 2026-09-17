@@ -9,7 +9,7 @@ What this proves: Python service + tests + Docker + Compose + CI + IaC.
 - Docker: multi-stage, non-root, HEALTHCHECK
 - CI: `.github/workflows/ci.yml` — test → build → push to GHCR
 - IaC: `infra/main.tf` — Terraform Docker provider example
-- Observability: Prometheus (`monitoring/prometheus.yml`) + Grafana provisioned
+- Observability: Prometheus (`monitoring/prometheus.yml`) + alerts (`monitoring/alerts.yml`) + Grafana provisioned with dashboard
 - K8s: Deployment + Service (`k8s/`, Kustomize) using the GHCR image
 
 ## Run locally
@@ -22,6 +22,10 @@ docker compose up --build
 # prometheus: http://localhost:9090
 # grafana: http://localhost:3000 (admin/admin)
 ```
+
+## Observability
+- Grafana (`http://localhost:3000`, admin/admin) auto-loads the **devops-ci-showcase** dashboard: request rate, 5xx %, p50/p95 latency, uptime.
+- Prometheus (`http://localhost:9090`) evaluates `monitoring/alerts.yml`: `AppDown` (critical), `HighErrorRate` >5% 5xx, `HighLatencyP95` >1s. Check Alerts page to see state.
 
 ## Deploy to Kubernetes (needs a cluster: Docker Desktop K8s, kind, or minikube)
 ```powershell
