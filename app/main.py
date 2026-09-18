@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request, Response
-from fastapi.responses import JSONResponse
-from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 import os
 import time
+
+from fastapi import FastAPI, Request, Response
+from fastapi.responses import JSONResponse
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 
 START_TIME = time.time()
 VERSION = os.getenv("APP_VERSION", "0.1.0")
